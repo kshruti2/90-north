@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            z-index: 1000;
+        }
+
+        /* Layout styles */
+        .content {
+            display: flex;
+            margin-top: 50px; /* Adjust based on navbar height */
+        }
+
+        .left-menu {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 15px;
+            transition: width 0.3s;
+        }
+
+        .left-menu.collapsed {
+            width: 50px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .right-panel {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 15px;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .content {
+                flex-direction: column;
+            }
+
+            .left-menu, .right-panel {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <button onclick="toggleMenu()">Toggle Menu</button>
+    Responsive Webpage Navbar
+</div>
+
+<div class="content">
+    <div class="left-menu" id="leftMenu">Left Menu</div>
+    <div class="main-content">Main Content Area</div>
+    <div class="right-panel">Right Panel</div>
+</div>
+
+<div class="footer">Footer Content</div>
+
+<script>
+    // Function to toggle the collapsible left menu
+    function toggleMenu() {
+        const leftMenu = document.getElementById('leftMenu');
+        leftMenu.classList.toggle('collapsed');
+    }
+
+    // Function to adjust page zoom based on screen width
+    function adjustZoom() {
+        const screenWidth = window.innerWidth;
+        let zoomLevel = 1;
+
+        if (screenWidth > 992 && screenWidth <= 1600) {
+            zoomLevel = 0.9;
+        } else if (screenWidth >= 700 && screenWidth <= 767) {
+            zoomLevel = 0.8;
+        } else if (screenWidth >= 600 && screenWidth < 700) {
+            zoomLevel = 0.75;
+        } else if (screenWidth <= 600) {
+            zoomLevel = 0.5;
+        }
+
+        document.body.style.zoom = zoomLevel;
+    }
+
+    // Add event listener to adjust zoom on window resize
+    window.addEventListener('resize', adjustZoom);
+
+    // Initial call to set zoom on page load
+    adjustZoom();
+</script>
+
+</body>
+</html>
